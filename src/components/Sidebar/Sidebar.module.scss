@@ -122,17 +122,17 @@ select {
   margin-bottom: 1rem;
 
   button {
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background-color: #f2f2f2;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: #dadada;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: 0.2s ease;
+    border: none;
 
     &.active {
       background-color: #0085ff;
       color: white;
-      border-color: #0085ff;
+      border: none;
     }
   }
 }

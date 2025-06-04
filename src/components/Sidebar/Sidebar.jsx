@@ -6,18 +6,10 @@ import styles from "./Sidebar.module.scss";
 export default function Sidebar({ onGenerateCalendar }) {
   const [tankName, setTankName] = useState("");
   const [tankSize, setTankSize] = useState("");
-  const [selectedSpecies, setSelectedSpecies] = useState([]);
-  const [speciesInput, setSpeciesInput] = useState("");
+  const [fishSize, setFishSize] = useState("");
   const [substrate, setSubstrate] = useState("");
   const [hasPlants, setHasPlants] = useState(null);
   const [hasFilter, setHasFilter] = useState(null);
-
-  const handleAddSpecies = () => {
-    if (speciesInput && !selectedSpecies.includes(speciesInput)) {
-      setSelectedSpecies([...selectedSpecies, speciesInput]);
-      setSpeciesInput("");
-    }
-  };
 
   return (
     <div className={styles.sidebar}>
@@ -37,7 +29,7 @@ export default function Sidebar({ onGenerateCalendar }) {
         수조 크기 <p>(필수)</p>
       </label>
       <select value={tankSize} onChange={(e) => setTankSize(e.target.value)}>
-        <option value="">선택하세요</option>
+        <option value="">-선택-</option>
         <option value="소형">소형 (30cm 이하)</option>
         <option value="중형">중형 (30~60cm)</option>
         <option value="대형">대형 (60cm 이상)</option>
@@ -46,24 +38,11 @@ export default function Sidebar({ onGenerateCalendar }) {
       <label>
         생물 종류 <p>(필수)</p>
       </label>
-      <div className={styles.speciesInputWrapper}>
-        <input
-          type="text"
-          placeholder="예시) 구피"
-          value={speciesInput}
-          onChange={(e) => setSpeciesInput(e.target.value)}
-        />
-        <button className={styles.addBtn} onClick={handleAddSpecies}>
-          +
-        </button>
-      </div>
-      <div className={styles.speciesBadges}>
-        {selectedSpecies.map((item, idx) => (
-          <span key={idx} className={styles.badge}>
-            {item}
-          </span>
-        ))}
-      </div>
+      <select value={fishSize} onChange={(e) => setFishSize(e.target.value)}>
+        <option value="">-선택-</option>
+        <option value="소형종">소형종 (~3cm)</option>
+        <option value="중형종">중형종 (4cm~8cm)</option>
+      </select>
 
       <label>
         수초 유무 <p>(필수)</p>
@@ -74,14 +53,14 @@ export default function Sidebar({ onGenerateCalendar }) {
           className={hasPlants === true ? styles.active : ""}
           onClick={() => setHasPlants(true)}
         >
-          있음
+          있어요
         </button>
         <button
           type="button"
           className={hasPlants === false ? styles.active : ""}
           onClick={() => setHasPlants(false)}
         >
-          없음
+          없어요
         </button>
       </div>
 
@@ -94,14 +73,14 @@ export default function Sidebar({ onGenerateCalendar }) {
           className={hasFilter === true ? styles.active : ""}
           onClick={() => setHasFilter(true)}
         >
-          있음
+          있어요
         </button>
         <button
           type="button"
           className={hasFilter === false ? styles.active : ""}
           onClick={() => setHasFilter(false)}
         >
-          없음
+          없어요
         </button>
       </div>
 
@@ -109,10 +88,11 @@ export default function Sidebar({ onGenerateCalendar }) {
         바닥재 <p>(필수)</p>
       </label>
       <select value={substrate} onChange={(e) => setSubstrate(e.target.value)}>
-        <option value="">선택하세요</option>
-        <option value="모래">모래</option>
-        <option value="소일">소일</option>
-        <option value="자갈">자갈</option>
+        <option value="">-선택-</option>
+        <option value="일반 소일">일반 소일</option>
+        <option value="영양 소일">영양 소일</option>
+        <option value="샌드">샌드</option>
+        <option value="탱크항">탱크항</option>
       </select>
 
       <button
