@@ -9,7 +9,7 @@ export default function CalendarView({ tankName, calendarData }) {
       {/* 캘린더 데이터가 있을 때만 수조명 표시 */}
       {calendarData && calendarData.length > 0 ? (
         <>
-          <h2 className={styles.tankTitle}>수조 이름: {tankName}</h2>
+          <h2 className={styles.tankTitle}>{tankName}</h2>
           <div className={styles.calendar}>
             {calendarData.map((item, index) => (
               <div key={index} className={styles.dayCard}>

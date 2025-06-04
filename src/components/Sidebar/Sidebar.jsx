@@ -16,16 +16,6 @@ export default function Sidebar({ onGenerateCalendar }) {
       <h2>내 수조 설정</h2>
 
       <label>
-        수조 이름 <p>(필수)</p>
-      </label>
-      <input
-        type="text"
-        placeholder="예시) 우리집 1호 수조"
-        value={tankName}
-        onChange={(e) => setTankName(e.target.value)}
-      />
-
-      <label>
         수조 크기 <p>(필수)</p>
       </label>
       <select value={tankSize} onChange={(e) => setTankSize(e.target.value)}>
@@ -94,6 +84,16 @@ export default function Sidebar({ onGenerateCalendar }) {
         <option value="샌드">샌드</option>
         <option value="탱크항">탱크항</option>
       </select>
+
+      <label>
+        수조 이름 <p>(필수)</p>
+      </label>
+      <input
+        type="text"
+        placeholder="예시) 우리집 1호 수조"
+        value={tankName}
+        onChange={(e) => setTankName(e.target.value)}
+      />
 
       <button
         className={styles.generateBtn}
