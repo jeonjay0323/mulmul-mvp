@@ -1,72 +1,75 @@
-// src/components/CalendarView/CalendarView.jsx
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import styles from "./CalendarView.module.scss";
 
-export default function CalendarView({ calendarTasks = {} }) {
+export default function CalendarView({ calendarTasks, tankName }) {
+  const isVisible = !!calendarTasks;
+
   const today = new Date();
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(today.getMonth() + 1);
-  const [calendarGrid, setCalendarGrid] = useState([]);
 
-  useEffect(() => {
-    const generateCalendar = (year, month) => {
-      const firstDay = new Date(year, month - 1, 1);
-      const startDay = new Date(firstDay);
-      startDay.setDate(firstDay.getDate() - firstDay.getDay() + 1); // 월요일 시작
+  const safeTasks = useMemo(() => calendarTasks ?? {}, [calendarTasks]);
 
-      const days = [];
-      for (let i = 0; i < 42; i++) {
-        const date = new Date(startDay);
-        date.setDate(startDay.getDate() + i);
-        const iso = date.toISOString().split("T")[0];
+  const calendarGrid = useMemo(() => {
+    const firstDay = new Date(currentYear, currentMonth - 1, 1);
+    const startDay = new Date(firstDay);
+    startDay.setDate(firstDay.getDate() - ((firstDay.getDay() + 6) % 7)); // 월요일 시작
 
-        const isToday = iso === new Date().toISOString().split("T")[0];
+    const days = [];
+    for (let i = 0; i < 42; i++) {
+      const date = new Date(startDay);
+      date.setDate(startDay.getDate() + i);
+      const iso = date.toISOString().split("T")[0];
 
-        days.push({
-          date: iso,
-          isCurrentMonth: date.getMonth() + 1 === month,
-          isToday: isToday,
-          tasks: calendarTasks[iso] || [],
-        });
-      }
-      return days;
-    };
+      const isToday = iso === new Date().toISOString().split("T")[0];
 
-    setCalendarGrid(generateCalendar(currentYear, currentMonth));
-  }, [currentYear, currentMonth, calendarTasks]);
-
-  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+      days.push({
+        date: iso,
+        isCurrentMonth: date.getMonth() + 1 === currentMonth,
+        isToday,
+        tasks: safeTasks[iso] || [],
+      });
+    }
+    return days;
+  }, [currentYear, currentMonth, safeTasks]);
 
   const handlePrevMonth = () => {
-    if (currentMonth === 1) {
-      setCurrentYear(currentYear - 1);
-      setCurrentMonth(12);
-    } else {
-      setCurrentMonth(currentMonth - 1);
-    }
+    setCurrentMonth((prev) => (prev === 1 ? 12 : prev - 1));
+    if (currentMonth === 1) setCurrentYear((y) => y - 1);
   };
 
   const handleNextMonth = () => {
-    if (currentMonth === 12) {
-      setCurrentYear(currentYear + 1);
-      setCurrentMonth(1);
-    } else {
-      setCurrentMonth(currentMonth + 1);
-    }
+    setCurrentMonth((prev) => (prev === 12 ? 1 : prev + 1));
+    if (currentMonth === 12) setCurrentYear((y) => y + 1);
   };
+
+  if (!isVisible) {
+    return (
+      <div className={styles.placeholder}>
+        <h3>수조 관리 캘린더를 자동 생성해보세요!</h3>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.calendarWrapper}>
-      <div className={styles.calendarHeader}>
-        <button onClick={handlePrevMonth}>{"<"}</button>
-        <h2>
-          {currentYear}년 {currentMonth}월
-        </h2>
-        <button onClick={handleNextMonth}>{">"}</button>
+      <div className={styles.calendarUnit}>
+        <h3 className={styles.tankTitle}>{tankName}</h3>
+        <div className={styles.calendarHeader}>
+          <button className={styles.beforeMonth} onClick={handlePrevMonth}>
+            {"<"}
+          </button>
+          <h3>
+            {currentYear}년 {currentMonth}월
+          </h3>
+          <button className={styles.nextMonth} onClick={handleNextMonth}>
+            {">"}
+          </button>
+        </div>
       </div>
 
       <div className={styles.headerRow}>
-        {days.map((day) => (
+        {["월", "화", "수", "목", "금", "토", "일"].map((day) => (
           <div key={day} className={styles.dayHeader}>
             {day}
           </div>

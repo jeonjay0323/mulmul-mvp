@@ -1,51 +1,35 @@
-// src/App.jsx
 import { useState } from "react";
-import Sidebar from "./components/Sidebar/Sidebar";
-import CalendarView from "./components/CalendarView/CalendarView";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import Sidebar from "./components/Sidebar/Sidebar";
+import CalendarView from "./components/CalendarView/CalendarView";
+import "./index.css";
 
 export default function App() {
-  const [calendarTasks, setCalendarTasks] = useState({});
+  const [calendarTasks, setCalendarTasks] = useState(null); // 일정
+  const [tankName, setTankName] = useState(""); // 수조명
 
-  const handleGenerateCalendar = () => {
+  const handleGenerateCalendar = (tankName) => {
     const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth(); // 0-based
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    const tasksByDate = {};
-
-    for (let i = 1; i <= daysInMonth; i++) {
-      const date = new Date(year, month, i);
+    const tasks = {};
+    for (let i = 0; i < 30; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
       const iso = date.toISOString().split("T")[0];
-
-      // 매일 급이
-      tasksByDate[iso] = [
-        {
-          label: "급이 3회",
-          color: "blue",
-        },
-      ];
-
-      // 2주마다 환수
-      if ((i - 1) % 14 === 0) {
-        tasksByDate[iso].push({
-          label: "환수",
-          color: "green",
-        });
-      }
+      tasks[iso] = [{ label: "급이 3회", color: "blue" }];
+      if (i % 14 === 0) tasks[iso].push({ label: "환수", color: "green" });
     }
 
-    setCalendarTasks(tasksByDate);
+    setTankName(tankName);
+    setCalendarTasks(tasks);
   };
 
   return (
     <>
       <Header />
-      <div style={{ display: "flex" }}>
+      <div className="main-layout">
         <Sidebar onGenerateCalendar={handleGenerateCalendar} />
-        <CalendarView calendarTasks={calendarTasks} />
+        <CalendarView tankName={tankName} calendarTasks={calendarTasks} />
       </div>
       <Footer />
     </>
