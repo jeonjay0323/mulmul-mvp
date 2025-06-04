@@ -3,11 +3,15 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Sidebar from "./components/Sidebar/Sidebar";
 import CalendarView from "./components/CalendarView/CalendarView";
+import FeedingModal from "./components/FeedingModal/FeedingModal";
+import SuggestionModal from "./components/SuggestionModal/SuggestionModal";
 import "./index.css";
 
 export default function App() {
-  const [calendarTasks, setCalendarTasks] = useState(null); // 일정
-  const [tankName, setTankName] = useState(""); // 수조명
+  const [calendarTasks, setCalendarTasks] = useState(null);
+  const [tankName, setTankName] = useState("");
+  const [isFeedingOpen, setFeedingOpen] = useState(false);
+  const [isSuggestionOpen, setSuggestionOpen] = useState(false);
 
   const handleGenerateCalendar = (tankName) => {
     const today = new Date();
@@ -22,6 +26,7 @@ export default function App() {
 
     setTankName(tankName);
     setCalendarTasks(tasks);
+    setFeedingOpen(true); // ✅ 첫 모달 오픈
   };
 
   return (
@@ -32,6 +37,19 @@ export default function App() {
         <CalendarView tankName={tankName} calendarTasks={calendarTasks} />
       </div>
       <Footer />
+
+      {isFeedingOpen && (
+        <FeedingModal
+          onNext={() => {
+            setFeedingOpen(false);
+            setSuggestionOpen(true);
+          }}
+        />
+      )}
+
+      {isSuggestionOpen && (
+        <SuggestionModal onClose={() => setSuggestionOpen(false)} />
+      )}
     </>
   );
 }

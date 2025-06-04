@@ -100,7 +100,7 @@ export default function Sidebar({ onGenerateCalendar }) {
         onClick={() => onGenerateCalendar(tankName)}
         disabled={!tankName.trim()}
       >
-        관리 캘린더 AI 생성
+        관리 캘린더 자동 생성
       </button>
     </div>
   );
