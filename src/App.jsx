@@ -1,40 +1,53 @@
+// src/App.jsx
 import { useState } from "react";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
 import Sidebar from "./components/Sidebar/Sidebar";
 import CalendarView from "./components/CalendarView/CalendarView";
-import "./index.css";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
-function App() {
-  const [tankName, setTankName] = useState("");
-  const [calendarData, setCalendarData] = useState([]);
+export default function App() {
+  const [calendarTasks, setCalendarTasks] = useState({});
 
-  const handleGenerateCalendar = (newTankName) => {
-    setTankName(newTankName);
-    const dummyCalendar = [
-      { day: "월", task: "물 갈기" },
-      { day: "화", task: "사료 주기" },
-      { day: "수", task: "여과기 점검" },
-      { day: "목", task: "" },
-      { day: "금", task: "조명 켜기" },
-      { day: "토", task: "청소" },
-      { day: "일", task: "" },
-    ];
-    setCalendarData(dummyCalendar);
+  const handleGenerateCalendar = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth(); // 0-based
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const tasksByDate = {};
+
+    for (let i = 1; i <= daysInMonth; i++) {
+      const date = new Date(year, month, i);
+      const iso = date.toISOString().split("T")[0];
+
+      // 매일 급이
+      tasksByDate[iso] = [
+        {
+          label: "급이 3회",
+          color: "blue",
+        },
+      ];
+
+      // 2주마다 환수
+      if ((i - 1) % 14 === 0) {
+        tasksByDate[iso].push({
+          label: "환수",
+          color: "green",
+        });
+      }
+    }
+
+    setCalendarTasks(tasksByDate);
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+    <>
       <Header />
-      <div style={{ display: "flex", flex: 1 }}>
+      <div style={{ display: "flex" }}>
         <Sidebar onGenerateCalendar={handleGenerateCalendar} />
-        <div style={{ flex: 1, padding: "2rem", overflowY: "auto" }}>
-          <CalendarView tankName={tankName} calendarData={calendarData} />
-        </div>
+        <CalendarView calendarTasks={calendarTasks} />
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
-
-export default App;
