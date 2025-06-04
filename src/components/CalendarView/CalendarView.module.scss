@@ -1,0 +1,30 @@
+/* src/components/CalendarView/CalendarView.module.scss */
+.wrapper {
+  padding: 24px;
+}
+
+.tankTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+.dayCard {
+  padding: 12px;
+  background: #f2f2f2;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.placeholder {
+  color: #aaa;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 32px;
+}

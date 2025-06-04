@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "Paperlogy";
+  src: url("./Paperlogy-1Light.ttf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Paperlogy";
+  src: url("./Paperlogy-2Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Paperlogy";
+  src: url("./Paperlogy-3SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Paperlogy";
+  src: url("./Paperlogy-4Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Paperlogy";
+  src: url("./Paperlogy-5Black.ttf") format("truetype");
+  font-weight: 900;
+}

@@ -1,0 +1,7 @@
+@import "./fonts/fonts.css";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Paperlogy", sans-serif;
+}
