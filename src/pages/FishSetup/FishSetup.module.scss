@@ -1,0 +1,120 @@
+/* src/pages/FishSetup/FishSetup.module.scss */
+.setWrapper {
+  gap: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+.uploadButton {
+  height: 34.5px;
+  margin: 0;
+  padding: 8px 12px;
+  color: white;
+  font-weight: 400;
+  font-size: 12px;
+  align-items: center;
+  font-family: "Paperlogy", sans-serif;
+  background-color: #444;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.uploadWrapper {
+  width: 72%;
+  display: flex;
+  height: 34.5px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  align-items: center;
+  margin: 0;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: rgb(248, 248, 248);
+}
+
+.fileName {
+  display: flex;
+  color: #444;
+  font-size: 14px;
+  font-weight: 400;
+  word-break: break-all;
+  align-items: center;
+}
+
+.fileIcon {
+  font-size: 1rem;
+}
+
+.leftPane {
+  background-image: url("/src/assets/girl.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.4); // ⬅️ 어두운 색 덧입힘
+  background-blend-mode: darken;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: flex-end;
+  padding: 80px;
+  gap: 30px;
+}
+
+h1 {
+  font-size: 74px;
+}
+
+.image {
+  width: 150px;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 300;
+  color: whitesmoke;
+}
+
+.rightPane p {
+  color: #6b6b6b;
+  line-height: 14px;
+}
+
+.rightPane label {
+  display: flex;
+  align-items: center;
+  line-height: 14px;
+}
+
+.rightPane {
+  display: flex;
+  width: 50%;
+  padding: 240px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  height: 100dvh;
+  margin: 0 auto;
+  background-color: rgb(243, 243, 243);
+}
+
+.preview {
+  width: 180px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.saveBtn {
+  padding: 12px;
+  font-size: 14px;
+  border: none;
+  color: white;
+  background-color: #0085ff;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+}

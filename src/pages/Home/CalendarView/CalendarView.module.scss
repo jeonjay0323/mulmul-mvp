@@ -1,0 +1,125 @@
+.calendarWrapper {
+  width: 100%;
+  padding: 20px;
+}
+
+.calendarUnit {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+.calendarHeader {
+  display: flex;
+  gap: 20px;
+}
+
+.headerRow {
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(7, 1fr);
+  margin-top: 1rem;
+}
+
+.dayHeader {
+  font-weight: 600;
+  font-size: 10px;
+}
+
+.grid {
+  display: grid;
+  width: 100%;
+  height: 80%;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0px;
+  margin-top: 0.5rem;
+}
+
+.cell {
+  position: relative;
+  padding: 8px;
+  min-height: 80px;
+  border-radius: 8px;
+}
+
+.today {
+  color: #0085ff;
+  font-weight: 600;
+  outline: 2px solid #0085ff;
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+
+.dimmed {
+  color: #ccc;
+  // background-color: #f9f9f9;
+}
+
+.date {
+  font-size: 10px;
+  margin-bottom: 4px;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.taskTag {
+  padding: 4px 6px;
+  color: #0085ff;
+  font-weight: 600;
+  font-size: 12px;
+  border-radius: 4px;
+  background-color: #e0f0ff;
+}
+
+.more {
+  color: #888;
+  font-size: 0.75rem;
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  color: #999;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder h3 {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  align-content: center;
+}
+
+.beforeMonth,
+.nextMonth {
+  width: 22px;
+  border: none;
+  color: #272727;
+  font-weight: 600;
+  align-items: center;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.blue {
+  background-color: #b463002e;
+  color: #b46300;
+}
+
+.green {
+  background-color: #30b7ff3f; // 환수용 초록색
+  color: #0085ff;
+}
